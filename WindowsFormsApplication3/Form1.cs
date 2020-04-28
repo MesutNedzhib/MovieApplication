@@ -13,8 +13,8 @@ namespace WindowsFormsApplication3
 {
     public partial class Form1 : Form
     {
-        String filePath = @"C:\Users\X\Documents\Visual Studio 2013\Projects\WindowsFormsApplication3\test.txt";
-        String filePath2 = @"C:\Users\X\Documents\Visual Studio 2013\Projects\WindowsFormsApplication3\test.txt";
+        String filePath = @"C:\Users\X\Documents\Visual Studio 2013\Projects\WindowsFormsApplication3\test2.txt";
+        String filePath2 = @"C:\Users\X\Documents\Visual Studio 2013\Projects\WindowsFormsApplication3\test2.txt";
         DataTable table;
         List<Movie> movies = new List<Movie>();
         int br = 0;
@@ -28,7 +28,7 @@ namespace WindowsFormsApplication3
             table.Columns.Add("Actors", typeof(string));
             table.Columns.Add("Genre", typeof(string));
             table.Columns.Add("Date or Release", typeof(string));
-            table.Columns.Add("Rating", typeof(double));
+            table.Columns.Add("Rating", typeof(double));         
             dataGridView1.DataSource = table;
         }
 
@@ -107,7 +107,8 @@ namespace WindowsFormsApplication3
             }
             else if (comboBox1.Text == "Genre")
             {
-                 searchByGenre();
+                 //searchByGenre();
+                testSearchGenre();
             }
             else if(comboBox1.Text=="Date of Release")
             {
@@ -137,20 +138,35 @@ namespace WindowsFormsApplication3
             
         }
 
+      
         void addMovie()
         {
             String m_name = textBox1.Text;
-            String m_actors = textBox2.Text;
-            String m_genre = comboBox2.SelectedItem.ToString() + "," + comboBox3.SelectedItem.ToString() + "," + comboBox4.SelectedItem.ToString();
+            String m_actors = textBox2.Text;            
             String m_date = textBox4.Text;
             double m_rating = double.Parse(textBox5.Text);
+            String m_genre = "";
 
 
-                if (movieProvider()&&dateProvider(m_date) && ratingProvider())
+                if (movieProvider()&&genreProvider()&&dateProvider(m_date) && ratingProvider())
                 {
                     br = movies.Count();
                     br++;
+                    
+                    if (comboBox2.SelectedIndex != -1 && comboBox3.SelectedIndex != -1 && comboBox4.SelectedIndex != -1)
+                    {
+                        m_genre = comboBox2.SelectedItem.ToString() + "," + comboBox3.SelectedItem.ToString() + "," + comboBox4.SelectedItem.ToString();
+                    }
+                    else if (comboBox2.SelectedIndex != -1 && comboBox3.SelectedIndex != -1)
+                    {
+                        m_genre = comboBox2.SelectedItem.ToString() + "," + comboBox3.SelectedItem.ToString();
+                    }
+                    else if (comboBox2.SelectedIndex != -1)
+                    {
+                        m_genre = comboBox2.SelectedItem.ToString();
+                    }
 
+                    
                     movies.Add(new Movie(br, m_name, m_actors, m_genre, m_date, m_rating));
 
                     idSort();
@@ -417,7 +433,7 @@ namespace WindowsFormsApplication3
         {
             bool flag = true;
             String m_name = textBox1.Text;
-            if (textBox1.Text != null)
+            if (textBox1.Text.Length!=0)
             {
                 foreach (var search in movies)
                 {
@@ -433,6 +449,11 @@ namespace WindowsFormsApplication3
                         flag = true;
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please insert movie name!", "Warning", MessageBoxButtons.OK);
+                flag = false;
             }
             return flag;
         }
@@ -453,6 +474,28 @@ namespace WindowsFormsApplication3
             }
         }
 
+        bool genreProvider()
+        {
+            if (comboBox2.SelectedIndex != -1 && comboBox3.SelectedIndex != -1 && comboBox4.SelectedIndex != -1)
+            {
+                return true;
+            }
+            else if (comboBox2.SelectedIndex != -1 && comboBox3.SelectedIndex != -1)
+            {
+                return true;
+            }
+            else if (comboBox2.SelectedIndex != -1)
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Please select Genre!", "Warning", MessageBoxButtons.OK);
+                return false;
+            }
+           
+        }
+
         private void textBox6_Click(object sender, EventArgs e)
         {
             textBox6.Clear();
@@ -463,5 +506,121 @@ namespace WindowsFormsApplication3
                 movies = movies.OrderByDescending(i => DateTime.Parse(i.getDate())).ToList();
         }
 
+        void testSearchGenre()
+        {
+            String search = textBox6.Text;
+            String[] entries = search.Split(',');
+
+            Boolean flag = false;
+            table.Clear();
+            int count = 0;
+            int count2 = 0;
+            try
+            {
+                if (textBox6.Text.Length != 0)
+                {
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        Boolean isPresent = movies[i].getGenre().IndexOf(entries[0]) != -1 ? true : false;
+                        if (isPresent)
+                        {
+                           
+                            count++;
+                            count2++;
+                            for (int j = 0; j < count; j++)
+                            {
+                                ratingSort();
+                                table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
+                                if (count == count2)
+                                {
+                                    break;
+                                }
+                            }
+
+                            flag = true;
+                        }
+                    }
+
+                    if (flag == false)
+                    {
+                        MessageBox.Show("Movie with such genre not to exist!", "ERROR", MessageBoxButtons.OK);
+                        displayItems();
+                    }
+                }
+                else  if (textBox6.Text.Length >5 && textBox6.Text.Length <=14)
+                {
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        Boolean isPresent = movies[i].getGenre().IndexOf(entries[0]) != -1 ? true : false;
+                        Boolean isPresent2 = movies[i].getGenre().IndexOf(entries[1]) != -1 ? true : false;
+                        if (isPresent&&isPresent2)
+                        {
+
+                            count++;
+                            count2++;
+                            for (int j = 0; j < count; j++)
+                            {
+                                ratingSort();
+                                table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
+                                if (count == count2)
+                                {
+                                    break;
+                                }
+                            }
+
+                            flag = true;
+                        }
+                    }
+
+                    if (flag == false)
+                    {
+                        MessageBox.Show("Movie with such genre not to exist!", "ERROR", MessageBoxButtons.OK);
+                        displayItems();
+                    }
+                }
+                else if (textBox6.Text.Length > 14)
+                {
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        Boolean isPresent = movies[i].getGenre().IndexOf(entries[0]) != -1 ? true : false;
+                        Boolean isPresent2 = movies[i].getGenre().IndexOf(entries[1]) != -1 ? true : false;
+                        Boolean isPresent3 = movies[i].getGenre().IndexOf(entries[2]) != -1 ? true : false;
+                        if (isPresent && isPresent2 && isPresent3)
+                        {
+
+                            count++;
+                            count2++;
+                            for (int j = 0; j < count; j++)
+                            {
+                                ratingSort();
+                                table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
+                                if (count == count2)
+                                {
+                                    break;
+                                }
+                            }
+
+                            flag = true;
+                        }
+                    }
+
+                    if (flag == false)
+                    {
+                        MessageBox.Show("Movie with such genre not to exist!", "ERROR", MessageBoxButtons.OK);
+                        displayItems();
+                    }
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+              testSearchGenre();
+        }
     }
 }
