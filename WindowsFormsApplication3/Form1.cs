@@ -63,35 +63,104 @@ namespace WindowsFormsApplication3
         {
             table.Clear();
             String act_name = textBox6.Text;
+            String[] entries = act_name.Split(',');
             Boolean flag = false;
 
             int count = 0;
             int count2 = 0;
-
-            for (int i = 0; i < movies.Count; i++)
+            try
             {
-                Boolean isPresent = movies[i].getActors().IndexOf(act_name) != -1 ? true : false;
-                if (isPresent)
-                {                
-                    count++;
-                    count2++;
-                    for (int j = 0; j < count; j++)
+                if (act_name.Length <= 14)
+                {
+                    for (int i = 0; i < movies.Count; i++)
                     {
-                        table.Rows.Add(count, movies[i].getName(), movies[i].getActors(),movies[i].getGenre(),movies[i].getDate(),movies[i].getRating());
-                        if (count == count2)
+                        Boolean isPresent = movies[i].getActors().IndexOf(entries[0]) != -1 ? true : false;
+                        if (isPresent)
                         {
-                            break;
+                            count++;
+                            count2++;
+                            for (int j = 0; j < count; j++)
+                            {
+                                table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
+                                if (count == count2)
+                                {
+                                    break;
+                                }
+                            }
+
+                            flag = true;
                         }
                     }
 
-                    flag = true;
+                    if (flag == false)
+                    {
+                        MessageBox.Show("Actor with that is name can't find in the database!", "ERROR", MessageBoxButtons.OK);
+                        displayItems();
+                    }
+                }
+                else if (act_name.Length > 14 && act_name.Length<=28)
+                {
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        Boolean isPresent = movies[i].getActors().IndexOf(entries[0]) != -1 ? true : false;
+                        Boolean isPresent2 = movies[i].getActors().IndexOf(entries[1]) != -1 ? true : false;
+                        if (isPresent&&isPresent2)
+                        {
+                            count++;
+                            count2++;
+                            for (int j = 0; j < count; j++)
+                            {
+                                table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
+                                if (count == count2)
+                                {
+                                    break;
+                                }
+                            }
+
+                            flag = true;
+                        }
+                    }
+
+                    if (flag == false)
+                    {
+                        MessageBox.Show("Actor with that is name can't find in the database!", "ERROR", MessageBoxButtons.OK);
+                        displayItems();
+                    }
+                }
+                else if (act_name.Length > 28)
+                {
+                    for (int i = 0; i < movies.Count; i++)
+                    {
+                        Boolean isPresent = movies[i].getActors().IndexOf(entries[0]) != -1 ? true : false;
+                        Boolean isPresent2 = movies[i].getActors().IndexOf(entries[1]) != -1 ? true : false;
+                        Boolean isPresent3 = movies[i].getActors().IndexOf(entries[2]) != -1 ? true : false;
+                        if (isPresent && isPresent2 && isPresent3)
+                        {
+                            count++;
+                            count2++;
+                            for (int j = 0; j < count; j++)
+                            {
+                                table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
+                                if (count == count2)
+                                {
+                                    break;
+                                }
+                            }
+
+                            flag = true;
+                        }
+                    }
+
+                    if (flag == false)
+                    {
+                        MessageBox.Show("Actor with that is name can't find in the database!", "ERROR", MessageBoxButtons.OK);
+                        displayItems();
+                    }
                 }
             }
-
-            if (flag == false)
+            catch
             {
-                MessageBox.Show("Actor with that is name can't find in the database!","ERROR",MessageBoxButtons.OK);
-                displayItems();
+
             }
 
         }
