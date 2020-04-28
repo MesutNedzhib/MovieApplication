@@ -1,0 +1,10 @@
+10*Deadpool 2*Ryan Reynolds, Josh Brolin, Morena Baccarin*Action,Adventure,Comedy*18-May-2018*7.7
+9*The Conjuring 2*Vera Farmiga, Patrick Wilson, Madison Wolfe*Horror,Mystery,Thriller*10-June-2016*7.3
+8*21 Jump Street*Jonah Hill, Channing Tatum, Ice Cube*Action,Comedy,Crime*16-March-2012*7.2
+7*Now You See Me 2*Jesse Eisenberg, Mark Ruffalo,Dave Franco*Action,Adventure,Comedy*10-June-2016*6.5
+6*Nerve*Emma Roberts, Dave Franco, Emily Meade*Adventure,Crime,Drama*27-July-2016*6.5
+5*The Maze Runner*Dylan O'Brien, Kaya Scodelario, Will Poulter*Action,Mystery,Sci-Fi*19-September-2014*6.8
+4*The Hunger Games*Jennifer Lawrence, Josh Hutcherson, Liam Hemsworth*Action,Adventure,Sci-Fi*23-March-2012*7.2
+3*Avengers: Endgame*Robert Downey Jr., Chris Evans, Mark Ruffalo*Action,Adventure,Drama*26-April-2019*8.4
+2*The Meg*Jason Statham, Bingbing Li, Rainn Wilson*Action,Horror,Sci-Fi*10-August-2018*5.7
+1*Fast & Furious Presents: Hobbs & Shaw *Dwayne Johnson, Jason Statham, Idris Elba*Action,Adventure*02-August-2019*6.5

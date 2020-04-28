@@ -13,8 +13,8 @@ namespace WindowsFormsApplication3
 {
     public partial class Form1 : Form
     {
-        String filePath = @"C:\Users\X\Documents\Visual Studio 2013\Projects\WindowsFormsApplication3\test2.txt";
-        String filePath2 = @"C:\Users\X\Documents\Visual Studio 2013\Projects\WindowsFormsApplication3\test2.txt";
+        String filePath = @"C:\Users\X\Documents\Visual Studio 2013\Projects\WindowsFormsApplication3\moviebase.txt";
+        String filePath2 = @"C:\Users\X\Documents\Visual Studio 2013\Projects\WindowsFormsApplication3\moviebase.txt";
         DataTable table;
         List<Movie> movies = new List<Movie>();
         int br = 0;
