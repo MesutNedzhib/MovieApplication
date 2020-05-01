@@ -70,7 +70,7 @@ namespace WindowsFormsApplication3
             int count2 = 0;
             try
             {
-                if (act_name.Length <= 14)
+                if (act_name.Length <= 15)
                 {
                     for (int i = 0; i < movies.Count; i++)
                     {
@@ -98,7 +98,7 @@ namespace WindowsFormsApplication3
                         displayItems();
                     }
                 }
-                else if (act_name.Length > 14 && act_name.Length<=28)
+                else if (act_name.Length > 15 && act_name.Length<=30)
                 {
                     for (int i = 0; i < movies.Count; i++)
                     {
@@ -127,7 +127,7 @@ namespace WindowsFormsApplication3
                         displayItems();
                     }
                 }
-                else if (act_name.Length > 28)
+                else if (act_name.Length > 30)
                 {
                     for (int i = 0; i < movies.Count; i++)
                     {
@@ -586,19 +586,20 @@ namespace WindowsFormsApplication3
             int count2 = 0;
             try
             {
-                if (textBox6.Text.Length != 0)
+                if (textBox6.Text.Length < 9)
                 {
+                    ratingSort();
                     for (int i = 0; i < movies.Count; i++)
                     {
                         Boolean isPresent = movies[i].getGenre().IndexOf(entries[0]) != -1 ? true : false;
                         if (isPresent)
                         {
-                           
+                            
                             count++;
                             count2++;
                             for (int j = 0; j < count; j++)
                             {
-                                ratingSort();
+                                
                                 table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
                                 if (count == count2)
                                 {
@@ -616,20 +617,20 @@ namespace WindowsFormsApplication3
                         displayItems();
                     }
                 }
-                else  if (textBox6.Text.Length >5 && textBox6.Text.Length <=14)
+                else  if (textBox6.Text.Length >9 && textBox6.Text.Length <=18)
                 {
+                    ratingSort();
                     for (int i = 0; i < movies.Count; i++)
                     {
                         Boolean isPresent = movies[i].getGenre().IndexOf(entries[0]) != -1 ? true : false;
                         Boolean isPresent2 = movies[i].getGenre().IndexOf(entries[1]) != -1 ? true : false;
                         if (isPresent&&isPresent2)
                         {
-
                             count++;
                             count2++;
                             for (int j = 0; j < count; j++)
                             {
-                                ratingSort();
+                                
                                 table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
                                 if (count == count2)
                                 {
@@ -647,8 +648,9 @@ namespace WindowsFormsApplication3
                         displayItems();
                     }
                 }
-                else if (textBox6.Text.Length > 14)
+                else if (textBox6.Text.Length > 18)
                 {
+                    ratingSort();
                     for (int i = 0; i < movies.Count; i++)
                     {
                         Boolean isPresent = movies[i].getGenre().IndexOf(entries[0]) != -1 ? true : false;
@@ -661,7 +663,7 @@ namespace WindowsFormsApplication3
                             count2++;
                             for (int j = 0; j < count; j++)
                             {
-                                ratingSort();
+                               
                                 table.Rows.Add(count, movies[i].getName(), movies[i].getActors(), movies[i].getGenre(), movies[i].getDate(), movies[i].getRating());
                                 if (count == count2)
                                 {
